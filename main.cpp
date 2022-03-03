@@ -30,7 +30,7 @@ int BFS(vector<vector <Element> >&mat, vector<vector <Element> >&prev, int row,i
 {
     //marking blocked elements as visited
     bool visited[row][col];
-    for (int i = 0; i < row; i++) 
+    for (int i = 0; i < row; i++)
     {
         for (int j = 0; j < col; j++)
         {
@@ -46,9 +46,9 @@ int BFS(vector<vector <Element> >&mat, vector<vector <Element> >&prev, int row,i
         }
     }
 
-    Element source; 
-    source.row = Prow; 
-    source.col = Pcol; 
+    Element source;
+    source.row = Prow;
+    source.col = Pcol;
 
     queue<Element> q;
     q.push(source);
@@ -58,19 +58,8 @@ int BFS(vector<vector <Element> >&mat, vector<vector <Element> >&prev, int row,i
     while (!q.empty())
     {
         Element e = q.front();
-        
-         //debug//
-        //queue<Element> qtemp = q;
-        // for (int i = 0 ; !qtemp.empty() ; i++)
-        // {
-        //     Element temp = qtemp.front();
-        //     cout << "item:" << i+1 << " row = " << temp.row+1 << ", col = " << temp.col+1 << endl;
-        //     qtemp.pop();
-	    // }
 
         q.pop();
-        
-        //cout << "Prow = " << p.row+1 << ", Pcol = " << p.col+1 << endl;
 
         x = e.row;
         y = e.col;
@@ -90,7 +79,7 @@ int BFS(vector<vector <Element> >&mat, vector<vector <Element> >&prev, int row,i
         }
 
         // moving right
-        if (y + 1 < col && visited[x][y + 1] == false) 
+        if (y + 1 < col && visited[x][y + 1] == false)
         {
             q.push(Element(x, y + 1, d + 1));
             visited[x][y + 1] = true;
@@ -102,9 +91,9 @@ int BFS(vector<vector <Element> >&mat, vector<vector <Element> >&prev, int row,i
                 return d + 1;
             }
         }
-        
+
         // moving down
-        if (x + 1 < row && visited[x + 1][y] == false) 
+        if (x + 1 < row && visited[x + 1][y] == false)
         {
             q.push(Element(x + 1, y, d + 1));
             visited[x + 1][y] = true;
@@ -118,10 +107,10 @@ int BFS(vector<vector <Element> >&mat, vector<vector <Element> >&prev, int row,i
         }
 
         // moving left
-        if (y - 1 >= 0 && visited[x][y - 1] == false) 
+        if (y - 1 >= 0 && visited[x][y - 1] == false)
         {
             q.push(Element(x, y - 1, d + 1));
-            visited[x][y - 1] = true; 
+            visited[x][y - 1] = true;
             prev[x][y - 1].row = x;
             prev[x][y - 1].col = y;
 
@@ -129,7 +118,7 @@ int BFS(vector<vector <Element> >&mat, vector<vector <Element> >&prev, int row,i
             {
                 return d + 1;
             }
-        }  
+        }
     }
     return -1;
 }
@@ -144,24 +133,24 @@ int calpoint (int playernum ,vector<vector <Element> > mat,vector< Element > pat
         switch (mat[path[i].row][path[i].col].value)
         {
             case 5:
-                if (playernum == 65) points += 1000; //65 = 'A' in ASCII code   
+                if (playernum == 65) points += 1000; //65 = 'A' in ASCII code
                 break;
             case 13:
-                if (playernum == 66) points += 1000; //66 = 'B' in ASCII code  
+                if (playernum == 66) points += 1000; //66 = 'B' in ASCII code
                 break;
             case 8:
                 if (playernum == 66) points -= 500;
                 break;
             case 16:
-                if (playernum == 65) points -= 500; 
+                if (playernum == 65) points -= 500;
                 break;
             case 11:
-                if (playernum == 66) points -= 10;  
+                if (playernum == 66) points -= 10;
                 break;
             case 12:
-                if (playernum == 65) points -= 10; 
+                if (playernum == 65) points -= 10;
                 break;
-            
+
             default:
                 break;
         }
@@ -172,15 +161,6 @@ int calpoint (int playernum ,vector<vector <Element> > mat,vector< Element > pat
 
 vector<Element> pathfunc(vector<vector <Element> >prev,int distance ,int row, int col,int Drow, int Dcol)
 {
-     //debug//
-    // for (int i = 0; i < row; i++)
-    // {
-    //     for (int j = 0; j < col; j++)
-    //     {
-    //         cout << prev[i][j].row << "," << prev[i][j].col << " ";
-    //     }
-    //     cout << endl;
-    // }
 
     vector <Element> path (distance);
     //intialize the first cell of vector with destination row and column to start a backward path
@@ -190,7 +170,7 @@ vector<Element> pathfunc(vector<vector <Element> >prev,int distance ,int row, in
     int trow;
     int tcol;
 
-    //before the 'for' starts we have destination row and column in 'path[0]' then at first in 'for' we have "path[i+1] = path[1]" 
+    //before the 'for' starts we have destination row and column in 'path[0]' then at first in 'for' we have "path[i+1] = path[1]"
     //in 'path[1]' we put information of " 'path[0]' in prev " , 'path[0]' is destination it means we put information of destination in prev matrix
     //in 'path[1]' and the information of that is row and column of previous element in path
     for (int i = 0; i < distance-1; i++)
@@ -215,7 +195,7 @@ int main()
     cin >> col;
     if (row < 1 || col < 1)
     {
-        cout << "!!row and column can't be 0 or negetive!!" << endl;
+        cerr << "!!  row and column can't be 0 or negetive  !!" << endl;
         abort();
     }
     //define a matrix using vector
@@ -238,55 +218,58 @@ int main()
     }
     for (int i = 0; i < row; i++)
     {
-        for (int j = 0; j < col; j++) 
+        for (int j = 0; j < col; j++)
         {
             myfile >> mat[i][j].value;
         }
     }
-    
+
 
     int Arow, Acol;
     cout << "Enter Row of Player A:" << endl;
     cin >> Arow;
     cout << "Enter Column of Player A:" << endl;
-    cin >> Acol; 
+    cin >> Acol;
 
     int Brow, Bcol;
     cout << "Enter Row of Player B:" << endl;
     cin >> Brow;
     cout << "Enter Column of Player B:" << endl;
-    cin >> Bcol; 
+    cin >> Bcol;
 
     if (Arow == Brow && Acol == Bcol)
     {
-        cout << "!!Player A and Player B must not have same row and column!!" << endl;
+        cout << "!!  Player A and Player B must not have same row and column  !!" << endl;
+        getch();
         abort();
     }
-    
+
     int Drow, Dcol;
     cout << "Enter Destination Row:" << endl;
     cin >> Drow;
     cout << "Enter Destination Column:" << endl;
-    cin >> Dcol;   
+    cin >> Dcol;
 
     if (Arow == Drow && Acol == Dcol)
     {
-        cout << "!!Player A and Destination must not have same row and column!!" << endl;
+        cerr << "!! Player A and Destination must not have same row and column  !! \n ";
+        getch();
         abort();
     }
-    if (Brow == Drow && Bcol == Dcol)
+    else if (Brow == Drow && Bcol == Dcol)
     {
-        cout << "!!Player B and Destination must not have same row and column!!" << endl;
+        cerr << "!! Player B and Destination must not have same row and column  !! \n " ;
+        getch();
         abort();
     }
 
-    if ( Arow < 1 || Brow < 1 || Drow < 1 || Acol < 1 || Bcol < 1 || Dcol < 1)
+    else if ( Arow < 1 || Brow < 1 || Drow < 1 || Acol < 1 || Bcol < 1 || Dcol < 1)
     {
-        cout << "row and column can't be 0 or negetive" << endl;
+        cerr << "!! row and column can't be 0 or negetive !! \n " ;
+        getch();
         abort();
     }
-    
-    
+
     //because in arrays index starts with 0
     Arow -= 1;
     Acol -= 1;
@@ -311,9 +294,9 @@ int main()
         {
             m1value = mat[i][j].value;
 
-            if (m1value == 65) // 65 = 'A' 
+            if (m1value == 65) // 65 = 'A'
             {
-                cout << left << setw(3) << "A "; 
+                cout << left << setw(3) << "A ";
             }
             else if (m1value == 66) // 66 = 'B'
             {
@@ -338,18 +321,18 @@ int main()
     int value;
     for (int i = 0; i < row; i++)
     {
-        for (int j = 0; j < col; j++) 
+        for (int j = 0; j < col; j++)
         {
             value = tempmat[i][j].value;
             if (value == 2 || value == 6 || value == 7 || value == 9 || value == 10 || value == 14 || value == 15)
             {
                 cout << "#  ";
             }
-            else if (value == 65) // 65 = 'A' 
+            else if (value == 65) // 65 = 'A'
             {
                 cout << "A  ";
             }
-            else if (value == 66) // 66 = 'B' 
+            else if (value == 66) // 66 = 'B'
             {
                 cout << "B  ";
             }
@@ -372,13 +355,13 @@ int main()
     vector <Element> path1 (distance1);
     path1 = pathfunc(prev1 , distance1 , row , col , Drow , Dcol);
     int Apoint = calpoint('A' , mat , path1 , distance1);
-   
+
     //call functions for Player B
     int distance2 = BFS(mat , prev2 , row , col , Brow , Bcol , Drow , Dcol);
     vector <Element> path2 (distance2);
     path2 = pathfunc(prev2 , distance2 , row , col , Drow , Dcol);
     int Bpoint = calpoint('B' , mat , path2 , distance2);
-    
+
     cout << "---------------------------------" << endl;
 
     //print informations for Player A
@@ -403,28 +386,37 @@ int main()
     //who is the winner?
     if (distance1 < distance2)
     {
-        cout << "!!!!Player A is the Winner!!!!" << endl;
+        if (distance1 != -1 )
+        cout << "!!!!  Player A is the Winner   !!!!" << endl;
+        else
+        cout << "!!!!  Shortest Path doesn't exist for Player A  !!!!" << endl;
+
     }
     else if (distance1 > distance2)
     {
-        cout << "!!!!Player B is the Winner!!!!" << endl;
+        if (distance2 != -1 )
+        cout << "!!!!   Player B is the Winner   !!!!" << endl;
+        else
+        cout << "!!!!  Shortest Path doesn't exist for Player B  !!!!" << endl;
     }
     else if (distance1 == distance2)
     {
         if (Apoint > Bpoint)
         {
-            cout << "!!!!Player A with more points is the Winner!!!!" << endl;
+            cout << "!!!!   Player A with more points is the Winner   !!!!" << endl;
         }
         else if (Apoint < Bpoint)
         {
-            cout << "!!!!Player B with more points is the Winner!!!!" << endl;
+            cout << "!!!!   Player B with more points is the Winner   !!!!" << endl;
         }
         else if (Apoint == Bpoint)
         {
-            cout << "!!!!Player A and Player B are Equal!!!!" << endl;
+            cout << "!!!!   Player A and Player B are Equal   !!!!" << endl;
         }
     }
 
     myfile.close();
+
+    getch();
     return 0;
 }
