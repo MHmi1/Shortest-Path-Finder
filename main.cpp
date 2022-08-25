@@ -47,12 +47,12 @@ int BFS(vector<vector <Element> >&mat, vector<vector <Element> >&prev, int row,i
     }
 
     Element source;
-    source.row = Prow;
-    source.col = Pcol;
-
+    int srow = source.row = Prow;
+    int scol = source.col = Pcol;
+  
     queue<Element> q;
     q.push(source);
-    visited[source.row][source.col] = true;
+    visited[srow][scol] = true;
 
     int x = -1,y = -1,d = 0;
     while (!q.empty())
